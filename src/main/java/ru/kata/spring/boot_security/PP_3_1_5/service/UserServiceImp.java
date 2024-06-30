@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.PP_3_1_5.service;
 
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +44,7 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
     }
     @Transactional
+    @Retryable
     @Override
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
